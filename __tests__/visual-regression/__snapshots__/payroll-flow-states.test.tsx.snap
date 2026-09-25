@@ -1072,6 +1072,13 @@ exports[`Visual Regression - Payroll Flow States > Payroll Run Detail - Failed S
               Run ID: 
               run-1
             </p>
+            <p
+              class="text-xs text-gray-400 mt-0.5"
+              data-testid="payroll-last-updated"
+            >
+              Last updated 
+              Jan 15, 2024, 12:00 AM
+            </p>
             <div
               class="flex items-center gap-2 mt-2"
             >
@@ -1159,6 +1166,9 @@ exports[`Visual Regression - Payroll Flow States > Payroll Run Detail - Failed S
             </div>
           </div>
         </div>
+        <div
+          class="flex items-center gap-2 shrink-0"
+        />
       </div>
       <div
         aria-label="Approval expiry status"
@@ -2331,6 +2341,13 @@ exports[`Visual Regression - Payroll Flow States > Payroll Run Detail - Pending 
               Run ID: 
               run-1
             </p>
+            <p
+              class="text-xs text-gray-400 mt-0.5"
+              data-testid="payroll-last-updated"
+            >
+              Last updated 
+              Jan 15, 2024, 12:00 AM
+            </p>
             <div
               class="flex items-center gap-2 mt-2"
             >
@@ -2415,13 +2432,16 @@ exports[`Visual Regression - Payroll Flow States > Payroll Run Detail - Pending 
             </div>
           </div>
         </div>
-        <span
-          class="inline-flex items-center justify-center px-4 py-2 rounded-md bg-amber-100 text-amber-800 border border-amber-200 text-sm font-medium cursor-not-allowed shrink-0"
-          data-testid="execution-blocked-missing-proof"
-          role="alert"
+        <div
+          class="flex items-center gap-2 shrink-0"
         >
-          Execution blocked — proof missing
-        </span>
+          <button
+            class="inline-flex items-center justify-center px-4 py-2 rounded-md border border-red-300 text-red-700 bg-white text-sm font-medium hover:bg-red-50 transition-colors"
+            type="button"
+          >
+            Cancel Batch
+          </button>
+        </div>
       </div>
       <div
         aria-label="Approval expiry status"
@@ -3502,6 +3522,13 @@ exports[`Visual Regression - Payroll Flow States > Payroll Run Detail - Verified
               Run ID: 
               run-1
             </p>
+            <p
+              class="text-xs text-gray-400 mt-0.5"
+              data-testid="payroll-last-updated"
+            >
+              Last updated 
+              Jan 15, 2024, 12:00 AM
+            </p>
             <div
               class="flex items-center gap-2 mt-2"
             >
@@ -3586,6 +3613,9 @@ exports[`Visual Regression - Payroll Flow States > Payroll Run Detail - Verified
             </div>
           </div>
         </div>
+        <div
+          class="flex items-center gap-2 shrink-0"
+        />
       </div>
       <div
         aria-label="Approval expiry status"
