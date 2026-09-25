@@ -11,6 +11,7 @@ import TreasuryDrainWarning from "./TreasuryDrainWarning";
 import FundingImbalanceDashboard from "./FundingImbalanceDashboard";
 import ReservationExpiryWarning from "./ReservationExpiryWarning";
 import ReservationToastListener from "./ReservationToastListener";
+import AssetReadinessTable from "./AssetReadinessTable";
 import { createFundingReservation } from "@/lib/events/reservationEvents";
 import SupportedAssetsEmptyState from "@/components/features/assets/SupportedAssetsEmptyState";
 import { hasSupportedPayrollAssets } from "@/lib/assets/supportedAssets";
@@ -107,6 +108,32 @@ function TreasuryView({ configuredAssets }: { configuredAssets?: Array<{ code: s
           </div>
         </article>
       </div>
+
+      <AssetReadinessTable
+        rows={[
+          {
+            assetCode: "USDC",
+            availableBalance: 45000,
+            reserveThreshold: 25000,
+            lastRefresh: "2026-09-25T13:00:00Z",
+            warning: "Above reserve threshold",
+          },
+          {
+            assetCode: "XLM",
+            availableBalance: 28000,
+            reserveThreshold: 25000,
+            lastRefresh: "2026-09-25T12:20:00Z",
+            warning: "Above reserve threshold",
+          },
+          {
+            assetCode: "EURC",
+            availableBalance: 18000,
+            reserveThreshold: 25000,
+            lastRefresh: "2026-09-25T11:40:00Z",
+            warning: "Below reserve threshold",
+          },
+        ]}
+      />
 
       <TreasuryDrainWarning
         currentBalance={balance}

@@ -9,6 +9,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Payroll Submission Progress Stepper (#295)**: Progress visibility for the six-stage payroll submission lifecycle
+  - Stages: validation, approval, signing, submission, confirmation, reconciliation
+  - Clear per-stage states: in progress, complete, pending, failed, and skipped (cancelled runs)
+  - Rendered above the payroll wizard's step nav during execution, on the payroll run detail page for in-flight and historical runs, and as a compact progress column in transaction history rows
+  - Stage derivation is a pure, unit-tested module reusable from wizard state, run records, or the redacted payroll event stream
+  - State-only rendering: no amounts, employee data, wallet addresses, proofs, or transaction hashes are shown
+
+- **New modules**:
+  - `src/payroll/submissionProgress.ts`: Pure stage-ordering, state derivation, summaries, and event-stream mapping (unit tested)
+  - `components/stepper/PayrollSubmissionStepper.tsx`: Accessible stepper (nav/list semantics, state markers, compact mode)
+  - `components/stepper/SubmissionProgressCell.tsx`: Inline six-dot progress cell with screen-reader summary for table rows
+
 - **Payroll Quick Filters Toolbar (#284)**: One-click filtering of the transaction history by lifecycle state
   - Chip groups for status, approval state, risk state, treasury readiness, and reconciliation outcome
   - Faceted counts on each chip update as other filters narrow the list
@@ -46,6 +58,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Clickable table rows for quick access
   - Dedicated "Details" button in actions column
 
+- **Reconciliation status history**:
+  - Added namespaced badges for `Matched`, `Pending`, `Mismatched`, `Failed`, and `Manually reviewed` outcomes
+  - Added reconciliation-aware filtering, search, CSV labels, and legacy `complete`/`partial` normalization
+  - Added privacy-safe status resolution that does not render private payroll values
+
 - **UI Components**:
   - `Sheet`: Slide-out drawer component based on Radix UI Dialog
   - `Badge`: Status indicator component with multiple variants
@@ -54,6 +71,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Testing**:
   - Comprehensive test suite for TransactionDetailDrawer component
   - Tests for status display, proof masking, clipboard operations, and null handling
+  - Reconciliation resolver, badge, filtering, legacy mapping, privacy, and edge-case coverage
 
 - **Documentation**:
   - Detailed feature documentation in `docs/TRANSACTION_DETAIL_FEATURE.md`

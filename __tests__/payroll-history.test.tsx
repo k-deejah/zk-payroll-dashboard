@@ -61,6 +61,34 @@ describe("PayrollHistory", () => {
     );
   });
 
+  it("rejects duplicate names when renaming a saved view", () => {
+    window.localStorage.clear();
+    render(<PayrollHistory runs={MOCK_PAYROLL_RUNS} />);
+
+    fireEvent.click(screen.getByRole("button", { name: /save view/i }));
+    fireEvent.change(screen.getByLabelText("View name"), {
+      target: { value: "Alpha" },
+    });
+    fireEvent.click(screen.getByRole("button", { name: /^save$/i }));
+
+    fireEvent.click(screen.getByRole("button", { name: /save view/i }));
+    fireEvent.change(screen.getByLabelText("View name"), {
+      target: { value: "Beta" },
+    });
+    fireEvent.click(screen.getByRole("button", { name: /^save$/i }));
+
+    fireEvent.click(screen.getByRole("button", { name: /saved views/i }));
+    fireEvent.click(screen.getByRole("button", { name: /rename beta/i }));
+
+    const renameInput = screen.getByRole("textbox", { name: /rename beta/i });
+    fireEvent.change(renameInput, { target: { value: "Alpha" } });
+    fireEvent.click(screen.getByRole("button", { name: /save view name/i }));
+
+    expect(screen.getByRole("alert")).toHaveTextContent(
+      "A saved view with this name already exists.",
+    );
+  });
+
   it("shows the filter panel when the filter button is clicked", () => {
     render(<PayrollHistory runs={MOCK_PAYROLL_RUNS} />);
 
@@ -81,6 +109,19 @@ describe("PayrollHistory", () => {
 
     fireEvent.click(filterButton);
     expect(screen.queryByLabelText("Status")).not.toBeInTheDocument();
+  });
+
+  it("filters runs by normalized reconciliation outcome", () => {
+    render(<PayrollHistory runs={MOCK_PAYROLL_RUNS} />);
+
+    fireEvent.click(screen.getByRole("button", { name: /filter/i }));
+    fireEvent.change(screen.getByLabelText("Transaction Outcome"), {
+      target: { value: "matched" },
+    });
+
+    expect(screen.getAllByText(/Feb 28, 2025/).length).toBeGreaterThan(0);
+    expect(screen.queryByText(/Mar 31, 2025/)).not.toBeInTheDocument();
+    expect(screen.getByText(/1 filter active/i)).toBeInTheDocument();
   });
 
   it("shows the active filter indicator when a status filter is applied", () => {

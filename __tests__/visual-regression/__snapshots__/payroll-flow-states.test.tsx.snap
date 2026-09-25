@@ -45,6 +45,348 @@ exports[`Visual Regression - Payroll Exception States > captures payroll executi
       </button>
     </div>
     <nav
+      aria-label="Payroll submission progress"
+      class="w-full"
+    >
+      <ol
+        class="flex flex-col gap-2 sm:flex-row sm:gap-0"
+      >
+        <li
+          class="flex items-start sm:flex-1 sm:gap-0"
+          data-stage="validation"
+          data-state="active"
+          data-testid="stage-validation"
+        >
+          <div
+            class="flex shrink-0 flex-col items-center"
+          >
+            <span
+              aria-hidden="true"
+              class="flex items-center justify-center rounded-full border-2 h-8 w-8 border-indigo-600 text-indigo-600 bg-white"
+            >
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-loader2 w-4 h-4 animate-spin"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M21 12a9 9 0 1 1-6.219-8.56"
+                />
+              </svg>
+            </span>
+            <span
+              class="mt-1 w-0.5 flex-1 rounded-full bg-gray-200 sm:hidden"
+            />
+          </div>
+          <div
+            class="min-w-0 pb-2 pt-1 sm:pr-4"
+          >
+            <span
+              class="block text-sm font-medium text-gray-900"
+            >
+              Validation
+              <span
+                class="sr-only"
+              >
+                : 
+                In progress
+              </span>
+            </span>
+            <span
+              class="block text-xs text-gray-500 mt-0.5"
+            >
+              Run data, treasury, and proof checks
+            </span>
+          </div>
+        </li>
+        <li
+          class="flex items-start sm:flex-1 sm:gap-0"
+          data-stage="approval"
+          data-state="pending"
+          data-testid="stage-approval"
+        >
+          <div
+            class="flex shrink-0 flex-col items-center"
+          >
+            <span
+              aria-hidden="true"
+              class="flex items-center justify-center rounded-full border-2 h-8 w-8 border-gray-300 text-gray-300 bg-white"
+            >
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-minus w-4 h-4"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M5 12h14"
+                />
+              </svg>
+            </span>
+            <span
+              class="mt-1 w-0.5 flex-1 rounded-full bg-gray-200 sm:hidden"
+            />
+          </div>
+          <div
+            class="min-w-0 pb-2 pt-1 sm:pr-4"
+          >
+            <span
+              class="block text-sm font-medium text-gray-400"
+            >
+              Approval
+              <span
+                class="sr-only"
+              >
+                : 
+                Pending
+              </span>
+            </span>
+            <span
+              class="block text-xs text-gray-500 mt-0.5"
+            >
+              Executive sign-off on the run
+            </span>
+          </div>
+        </li>
+        <li
+          class="flex items-start sm:flex-1 sm:gap-0"
+          data-stage="signing"
+          data-state="pending"
+          data-testid="stage-signing"
+        >
+          <div
+            class="flex shrink-0 flex-col items-center"
+          >
+            <span
+              aria-hidden="true"
+              class="flex items-center justify-center rounded-full border-2 h-8 w-8 border-gray-300 text-gray-300 bg-white"
+            >
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-minus w-4 h-4"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M5 12h14"
+                />
+              </svg>
+            </span>
+            <span
+              class="mt-1 w-0.5 flex-1 rounded-full bg-gray-200 sm:hidden"
+            />
+          </div>
+          <div
+            class="min-w-0 pb-2 pt-1 sm:pr-4"
+          >
+            <span
+              class="block text-sm font-medium text-gray-400"
+            >
+              Signing
+              <span
+                class="sr-only"
+              >
+                : 
+                Pending
+              </span>
+            </span>
+            <span
+              class="block text-xs text-gray-500 mt-0.5"
+            >
+              Wallet signature on the batch transaction
+            </span>
+          </div>
+        </li>
+        <li
+          class="flex items-start sm:flex-1 sm:gap-0"
+          data-stage="submission"
+          data-state="pending"
+          data-testid="stage-submission"
+        >
+          <div
+            class="flex shrink-0 flex-col items-center"
+          >
+            <span
+              aria-hidden="true"
+              class="flex items-center justify-center rounded-full border-2 h-8 w-8 border-gray-300 text-gray-300 bg-white"
+            >
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-minus w-4 h-4"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M5 12h14"
+                />
+              </svg>
+            </span>
+            <span
+              class="mt-1 w-0.5 flex-1 rounded-full bg-gray-200 sm:hidden"
+            />
+          </div>
+          <div
+            class="min-w-0 pb-2 pt-1 sm:pr-4"
+          >
+            <span
+              class="block text-sm font-medium text-gray-400"
+            >
+              Submission
+              <span
+                class="sr-only"
+              >
+                : 
+                Pending
+              </span>
+            </span>
+            <span
+              class="block text-xs text-gray-500 mt-0.5"
+            >
+              Transaction broadcast to the network
+            </span>
+          </div>
+        </li>
+        <li
+          class="flex items-start sm:flex-1 sm:gap-0"
+          data-stage="confirmation"
+          data-state="pending"
+          data-testid="stage-confirmation"
+        >
+          <div
+            class="flex shrink-0 flex-col items-center"
+          >
+            <span
+              aria-hidden="true"
+              class="flex items-center justify-center rounded-full border-2 h-8 w-8 border-gray-300 text-gray-300 bg-white"
+            >
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-minus w-4 h-4"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M5 12h14"
+                />
+              </svg>
+            </span>
+            <span
+              class="mt-1 w-0.5 flex-1 rounded-full bg-gray-200 sm:hidden"
+            />
+          </div>
+          <div
+            class="min-w-0 pb-2 pt-1 sm:pr-4"
+          >
+            <span
+              class="block text-sm font-medium text-gray-400"
+            >
+              Confirmation
+              <span
+                class="sr-only"
+              >
+                : 
+                Pending
+              </span>
+            </span>
+            <span
+              class="block text-xs text-gray-500 mt-0.5"
+            >
+              On-chain inclusion verified
+            </span>
+          </div>
+        </li>
+        <li
+          class="flex items-start sm:flex-1 sm:gap-0"
+          data-stage="reconciliation"
+          data-state="pending"
+          data-testid="stage-reconciliation"
+        >
+          <div
+            class="flex shrink-0 flex-col items-center"
+          >
+            <span
+              aria-hidden="true"
+              class="flex items-center justify-center rounded-full border-2 h-8 w-8 border-gray-300 text-gray-300 bg-white"
+            >
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-minus w-4 h-4"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M5 12h14"
+                />
+              </svg>
+            </span>
+          </div>
+          <div
+            class="min-w-0 pb-2 pt-1"
+          >
+            <span
+              class="block text-sm font-medium text-gray-400"
+            >
+              Reconciliation
+              <span
+                class="sr-only"
+              >
+                : 
+                Pending
+              </span>
+            </span>
+            <span
+              class="block text-xs text-gray-500 mt-0.5"
+            >
+              Payouts matched against the run
+            </span>
+          </div>
+        </li>
+      </ol>
+    </nav>
+    <nav
       aria-label="Payroll execution progress"
       class="flex items-center"
     >
@@ -1020,6 +1362,332 @@ exports[`Visual Regression - Payroll Flow States > Payroll Run Detail - Failed S
         Back
       </button>
     </div>
+    <nav
+      aria-label="Payroll submission progress"
+      class="w-full"
+    >
+      <ol
+        class="flex flex-col gap-1"
+      >
+        <li
+          class="flex items-start gap-2.5"
+          data-stage="validation"
+          data-state="complete"
+          data-testid="stage-validation"
+        >
+          <div
+            class="flex shrink-0 flex-col items-center"
+          >
+            <span
+              aria-hidden="true"
+              class="flex items-center justify-center rounded-full border-2 h-6 w-6 bg-green-600 border-green-600 text-white"
+            >
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-check w-4 h-4"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M20 6 9 17l-5-5"
+                />
+              </svg>
+            </span>
+            <span
+              class="mt-1 w-0.5 flex-1 rounded-full bg-green-400 sm:hidden"
+            />
+          </div>
+          <div
+            class="min-w-0 pb-2 pt-0.5 sm:pr-4"
+          >
+            <span
+              class="block font-medium text-xs text-gray-900"
+            >
+              Validation
+              <span
+                class="sr-only"
+              >
+                : 
+                Complete
+              </span>
+            </span>
+          </div>
+        </li>
+        <li
+          class="flex items-start gap-2.5"
+          data-stage="approval"
+          data-state="complete"
+          data-testid="stage-approval"
+        >
+          <div
+            class="flex shrink-0 flex-col items-center"
+          >
+            <span
+              aria-hidden="true"
+              class="flex items-center justify-center rounded-full border-2 h-6 w-6 bg-green-600 border-green-600 text-white"
+            >
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-check w-4 h-4"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M20 6 9 17l-5-5"
+                />
+              </svg>
+            </span>
+            <span
+              class="mt-1 w-0.5 flex-1 rounded-full bg-green-400 sm:hidden"
+            />
+          </div>
+          <div
+            class="min-w-0 pb-2 pt-0.5 sm:pr-4"
+          >
+            <span
+              class="block font-medium text-xs text-gray-900"
+            >
+              Approval
+              <span
+                class="sr-only"
+              >
+                : 
+                Complete
+              </span>
+            </span>
+          </div>
+        </li>
+        <li
+          class="flex items-start gap-2.5"
+          data-stage="signing"
+          data-state="complete"
+          data-testid="stage-signing"
+        >
+          <div
+            class="flex shrink-0 flex-col items-center"
+          >
+            <span
+              aria-hidden="true"
+              class="flex items-center justify-center rounded-full border-2 h-6 w-6 bg-green-600 border-green-600 text-white"
+            >
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-check w-4 h-4"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M20 6 9 17l-5-5"
+                />
+              </svg>
+            </span>
+            <span
+              class="mt-1 w-0.5 flex-1 rounded-full bg-green-400 sm:hidden"
+            />
+          </div>
+          <div
+            class="min-w-0 pb-2 pt-0.5 sm:pr-4"
+          >
+            <span
+              class="block font-medium text-xs text-gray-900"
+            >
+              Signing
+              <span
+                class="sr-only"
+              >
+                : 
+                Complete
+              </span>
+            </span>
+          </div>
+        </li>
+        <li
+          class="flex items-start gap-2.5"
+          data-stage="submission"
+          data-state="failed"
+          data-testid="stage-submission"
+        >
+          <div
+            class="flex shrink-0 flex-col items-center"
+          >
+            <span
+              aria-hidden="true"
+              class="flex items-center justify-center rounded-full border-2 h-6 w-6 bg-red-600 border-red-600 text-white"
+            >
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-alert-circle w-4 h-4"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="10"
+                />
+                <line
+                  x1="12"
+                  x2="12"
+                  y1="8"
+                  y2="12"
+                />
+                <line
+                  x1="12"
+                  x2="12.01"
+                  y1="16"
+                  y2="16"
+                />
+              </svg>
+            </span>
+            <span
+              class="mt-1 w-0.5 flex-1 rounded-full bg-gray-200 sm:hidden"
+            />
+          </div>
+          <div
+            class="min-w-0 pb-2 pt-0.5 sm:pr-4"
+          >
+            <span
+              class="block font-medium text-xs text-red-700"
+            >
+              Submission
+              <span
+                class="sr-only"
+              >
+                : 
+                Failed
+              </span>
+            </span>
+          </div>
+        </li>
+        <li
+          class="flex items-start gap-2.5"
+          data-stage="confirmation"
+          data-state="pending"
+          data-testid="stage-confirmation"
+        >
+          <div
+            class="flex shrink-0 flex-col items-center"
+          >
+            <span
+              aria-hidden="true"
+              class="flex items-center justify-center rounded-full border-2 h-6 w-6 border-gray-300 text-gray-300 bg-white"
+            >
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-minus w-4 h-4"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M5 12h14"
+                />
+              </svg>
+            </span>
+            <span
+              class="mt-1 w-0.5 flex-1 rounded-full bg-gray-200 sm:hidden"
+            />
+          </div>
+          <div
+            class="min-w-0 pb-2 pt-0.5 sm:pr-4"
+          >
+            <span
+              class="block font-medium text-xs text-gray-400"
+            >
+              Confirmation
+              <span
+                class="sr-only"
+              >
+                : 
+                Pending
+              </span>
+            </span>
+          </div>
+        </li>
+        <li
+          class="flex items-start gap-2.5"
+          data-stage="reconciliation"
+          data-state="pending"
+          data-testid="stage-reconciliation"
+        >
+          <div
+            class="flex shrink-0 flex-col items-center"
+          >
+            <span
+              aria-hidden="true"
+              class="flex items-center justify-center rounded-full border-2 h-6 w-6 border-gray-300 text-gray-300 bg-white"
+            >
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-minus w-4 h-4"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M5 12h14"
+                />
+              </svg>
+            </span>
+          </div>
+          <div
+            class="min-w-0 pb-2 pt-0.5"
+          >
+            <span
+              class="block font-medium text-xs text-gray-400"
+            >
+              Reconciliation
+              <span
+                class="sr-only"
+              >
+                : 
+                Pending
+              </span>
+            </span>
+          </div>
+        </li>
+      </ol>
+    </nav>
     <header
       class="bg-white rounded-lg shadow-sm p-6"
     >
@@ -1078,6 +1746,7 @@ exports[`Visual Regression - Payroll Flow States > Payroll Run Detail - Failed S
             >
               Last updated 
               Jan 15, 2024, 12:00 AM
+              Jan 15, 2024, 1:00 AM
             </p>
             <div
               class="flex items-center gap-2 mt-2"
@@ -2157,6 +2826,318 @@ exports[`Visual Regression - Payroll Flow States > Payroll Run Detail - Pending 
         Back
       </button>
     </div>
+    <nav
+      aria-label="Payroll submission progress"
+      class="w-full"
+    >
+      <ol
+        class="flex flex-col gap-1"
+      >
+        <li
+          class="flex items-start gap-2.5"
+          data-stage="validation"
+          data-state="complete"
+          data-testid="stage-validation"
+        >
+          <div
+            class="flex shrink-0 flex-col items-center"
+          >
+            <span
+              aria-hidden="true"
+              class="flex items-center justify-center rounded-full border-2 h-6 w-6 bg-green-600 border-green-600 text-white"
+            >
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-check w-4 h-4"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M20 6 9 17l-5-5"
+                />
+              </svg>
+            </span>
+            <span
+              class="mt-1 w-0.5 flex-1 rounded-full bg-green-400 sm:hidden"
+            />
+          </div>
+          <div
+            class="min-w-0 pb-2 pt-0.5 sm:pr-4"
+          >
+            <span
+              class="block font-medium text-xs text-gray-900"
+            >
+              Validation
+              <span
+                class="sr-only"
+              >
+                : 
+                Complete
+              </span>
+            </span>
+          </div>
+        </li>
+        <li
+          class="flex items-start gap-2.5"
+          data-stage="approval"
+          data-state="complete"
+          data-testid="stage-approval"
+        >
+          <div
+            class="flex shrink-0 flex-col items-center"
+          >
+            <span
+              aria-hidden="true"
+              class="flex items-center justify-center rounded-full border-2 h-6 w-6 bg-green-600 border-green-600 text-white"
+            >
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-check w-4 h-4"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M20 6 9 17l-5-5"
+                />
+              </svg>
+            </span>
+            <span
+              class="mt-1 w-0.5 flex-1 rounded-full bg-green-400 sm:hidden"
+            />
+          </div>
+          <div
+            class="min-w-0 pb-2 pt-0.5 sm:pr-4"
+          >
+            <span
+              class="block font-medium text-xs text-gray-900"
+            >
+              Approval
+              <span
+                class="sr-only"
+              >
+                : 
+                Complete
+              </span>
+            </span>
+          </div>
+        </li>
+        <li
+          class="flex items-start gap-2.5"
+          data-stage="signing"
+          data-state="complete"
+          data-testid="stage-signing"
+        >
+          <div
+            class="flex shrink-0 flex-col items-center"
+          >
+            <span
+              aria-hidden="true"
+              class="flex items-center justify-center rounded-full border-2 h-6 w-6 bg-green-600 border-green-600 text-white"
+            >
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-check w-4 h-4"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M20 6 9 17l-5-5"
+                />
+              </svg>
+            </span>
+            <span
+              class="mt-1 w-0.5 flex-1 rounded-full bg-green-400 sm:hidden"
+            />
+          </div>
+          <div
+            class="min-w-0 pb-2 pt-0.5 sm:pr-4"
+          >
+            <span
+              class="block font-medium text-xs text-gray-900"
+            >
+              Signing
+              <span
+                class="sr-only"
+              >
+                : 
+                Complete
+              </span>
+            </span>
+          </div>
+        </li>
+        <li
+          class="flex items-start gap-2.5"
+          data-stage="submission"
+          data-state="complete"
+          data-testid="stage-submission"
+        >
+          <div
+            class="flex shrink-0 flex-col items-center"
+          >
+            <span
+              aria-hidden="true"
+              class="flex items-center justify-center rounded-full border-2 h-6 w-6 bg-green-600 border-green-600 text-white"
+            >
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-check w-4 h-4"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M20 6 9 17l-5-5"
+                />
+              </svg>
+            </span>
+            <span
+              class="mt-1 w-0.5 flex-1 rounded-full bg-green-400 sm:hidden"
+            />
+          </div>
+          <div
+            class="min-w-0 pb-2 pt-0.5 sm:pr-4"
+          >
+            <span
+              class="block font-medium text-xs text-gray-900"
+            >
+              Submission
+              <span
+                class="sr-only"
+              >
+                : 
+                Complete
+              </span>
+            </span>
+          </div>
+        </li>
+        <li
+          class="flex items-start gap-2.5"
+          data-stage="confirmation"
+          data-state="active"
+          data-testid="stage-confirmation"
+        >
+          <div
+            class="flex shrink-0 flex-col items-center"
+          >
+            <span
+              aria-hidden="true"
+              class="flex items-center justify-center rounded-full border-2 h-6 w-6 border-indigo-600 text-indigo-600 bg-white"
+            >
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-loader2 w-4 h-4 animate-spin"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M21 12a9 9 0 1 1-6.219-8.56"
+                />
+              </svg>
+            </span>
+            <span
+              class="mt-1 w-0.5 flex-1 rounded-full bg-gray-200 sm:hidden"
+            />
+          </div>
+          <div
+            class="min-w-0 pb-2 pt-0.5 sm:pr-4"
+          >
+            <span
+              class="block font-medium text-xs text-gray-900"
+            >
+              Confirmation
+              <span
+                class="sr-only"
+              >
+                : 
+                In progress
+              </span>
+            </span>
+          </div>
+        </li>
+        <li
+          class="flex items-start gap-2.5"
+          data-stage="reconciliation"
+          data-state="pending"
+          data-testid="stage-reconciliation"
+        >
+          <div
+            class="flex shrink-0 flex-col items-center"
+          >
+            <span
+              aria-hidden="true"
+              class="flex items-center justify-center rounded-full border-2 h-6 w-6 border-gray-300 text-gray-300 bg-white"
+            >
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-minus w-4 h-4"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M5 12h14"
+                />
+              </svg>
+            </span>
+          </div>
+          <div
+            class="min-w-0 pb-2 pt-0.5"
+          >
+            <span
+              class="block font-medium text-xs text-gray-400"
+            >
+              Reconciliation
+              <span
+                class="sr-only"
+              >
+                : 
+                Pending
+              </span>
+            </span>
+          </div>
+        </li>
+      </ol>
+    </nav>
     <div
       aria-label="Payroll Run Locked: confirmation"
       class="bg-amber-50 border border-amber-200 rounded-lg p-4 flex items-start gap-3"
@@ -2347,6 +3328,7 @@ exports[`Visual Regression - Payroll Flow States > Payroll Run Detail - Pending 
             >
               Last updated 
               Jan 15, 2024, 12:00 AM
+              Jan 15, 2024, 1:00 AM
             </p>
             <div
               class="flex items-center gap-2 mt-2"
@@ -2435,6 +3417,13 @@ exports[`Visual Regression - Payroll Flow States > Payroll Run Detail - Pending 
         <div
           class="flex items-center gap-2 shrink-0"
         >
+          <span
+            class="inline-flex items-center justify-center px-4 py-2 rounded-md bg-gray-100 text-gray-500 text-sm font-medium cursor-not-allowed"
+            data-testid="execution-blocked-missing-proof"
+            role="alert"
+          >
+            Execution blocked — proof missing
+          </span>
           <button
             class="inline-flex items-center justify-center px-4 py-2 rounded-md border border-red-300 text-red-700 bg-white text-sm font-medium hover:bg-red-50 transition-colors"
             type="button"
@@ -3430,6 +4419,318 @@ exports[`Visual Regression - Payroll Flow States > Payroll Run Detail - Verified
         Back
       </button>
     </div>
+    <nav
+      aria-label="Payroll submission progress"
+      class="w-full"
+    >
+      <ol
+        class="flex flex-col gap-1"
+      >
+        <li
+          class="flex items-start gap-2.5"
+          data-stage="validation"
+          data-state="complete"
+          data-testid="stage-validation"
+        >
+          <div
+            class="flex shrink-0 flex-col items-center"
+          >
+            <span
+              aria-hidden="true"
+              class="flex items-center justify-center rounded-full border-2 h-6 w-6 bg-green-600 border-green-600 text-white"
+            >
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-check w-4 h-4"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M20 6 9 17l-5-5"
+                />
+              </svg>
+            </span>
+            <span
+              class="mt-1 w-0.5 flex-1 rounded-full bg-green-400 sm:hidden"
+            />
+          </div>
+          <div
+            class="min-w-0 pb-2 pt-0.5 sm:pr-4"
+          >
+            <span
+              class="block font-medium text-xs text-gray-900"
+            >
+              Validation
+              <span
+                class="sr-only"
+              >
+                : 
+                Complete
+              </span>
+            </span>
+          </div>
+        </li>
+        <li
+          class="flex items-start gap-2.5"
+          data-stage="approval"
+          data-state="complete"
+          data-testid="stage-approval"
+        >
+          <div
+            class="flex shrink-0 flex-col items-center"
+          >
+            <span
+              aria-hidden="true"
+              class="flex items-center justify-center rounded-full border-2 h-6 w-6 bg-green-600 border-green-600 text-white"
+            >
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-check w-4 h-4"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M20 6 9 17l-5-5"
+                />
+              </svg>
+            </span>
+            <span
+              class="mt-1 w-0.5 flex-1 rounded-full bg-green-400 sm:hidden"
+            />
+          </div>
+          <div
+            class="min-w-0 pb-2 pt-0.5 sm:pr-4"
+          >
+            <span
+              class="block font-medium text-xs text-gray-900"
+            >
+              Approval
+              <span
+                class="sr-only"
+              >
+                : 
+                Complete
+              </span>
+            </span>
+          </div>
+        </li>
+        <li
+          class="flex items-start gap-2.5"
+          data-stage="signing"
+          data-state="complete"
+          data-testid="stage-signing"
+        >
+          <div
+            class="flex shrink-0 flex-col items-center"
+          >
+            <span
+              aria-hidden="true"
+              class="flex items-center justify-center rounded-full border-2 h-6 w-6 bg-green-600 border-green-600 text-white"
+            >
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-check w-4 h-4"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M20 6 9 17l-5-5"
+                />
+              </svg>
+            </span>
+            <span
+              class="mt-1 w-0.5 flex-1 rounded-full bg-green-400 sm:hidden"
+            />
+          </div>
+          <div
+            class="min-w-0 pb-2 pt-0.5 sm:pr-4"
+          >
+            <span
+              class="block font-medium text-xs text-gray-900"
+            >
+              Signing
+              <span
+                class="sr-only"
+              >
+                : 
+                Complete
+              </span>
+            </span>
+          </div>
+        </li>
+        <li
+          class="flex items-start gap-2.5"
+          data-stage="submission"
+          data-state="complete"
+          data-testid="stage-submission"
+        >
+          <div
+            class="flex shrink-0 flex-col items-center"
+          >
+            <span
+              aria-hidden="true"
+              class="flex items-center justify-center rounded-full border-2 h-6 w-6 bg-green-600 border-green-600 text-white"
+            >
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-check w-4 h-4"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M20 6 9 17l-5-5"
+                />
+              </svg>
+            </span>
+            <span
+              class="mt-1 w-0.5 flex-1 rounded-full bg-green-400 sm:hidden"
+            />
+          </div>
+          <div
+            class="min-w-0 pb-2 pt-0.5 sm:pr-4"
+          >
+            <span
+              class="block font-medium text-xs text-gray-900"
+            >
+              Submission
+              <span
+                class="sr-only"
+              >
+                : 
+                Complete
+              </span>
+            </span>
+          </div>
+        </li>
+        <li
+          class="flex items-start gap-2.5"
+          data-stage="confirmation"
+          data-state="complete"
+          data-testid="stage-confirmation"
+        >
+          <div
+            class="flex shrink-0 flex-col items-center"
+          >
+            <span
+              aria-hidden="true"
+              class="flex items-center justify-center rounded-full border-2 h-6 w-6 bg-green-600 border-green-600 text-white"
+            >
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-check w-4 h-4"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M20 6 9 17l-5-5"
+                />
+              </svg>
+            </span>
+            <span
+              class="mt-1 w-0.5 flex-1 rounded-full bg-green-400 sm:hidden"
+            />
+          </div>
+          <div
+            class="min-w-0 pb-2 pt-0.5 sm:pr-4"
+          >
+            <span
+              class="block font-medium text-xs text-gray-900"
+            >
+              Confirmation
+              <span
+                class="sr-only"
+              >
+                : 
+                Complete
+              </span>
+            </span>
+          </div>
+        </li>
+        <li
+          class="flex items-start gap-2.5"
+          data-stage="reconciliation"
+          data-state="active"
+          data-testid="stage-reconciliation"
+        >
+          <div
+            class="flex shrink-0 flex-col items-center"
+          >
+            <span
+              aria-hidden="true"
+              class="flex items-center justify-center rounded-full border-2 h-6 w-6 border-indigo-600 text-indigo-600 bg-white"
+            >
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-loader2 w-4 h-4 animate-spin"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M21 12a9 9 0 1 1-6.219-8.56"
+                />
+              </svg>
+            </span>
+          </div>
+          <div
+            class="min-w-0 pb-2 pt-0.5"
+          >
+            <span
+              class="block font-medium text-xs text-gray-900"
+            >
+              Reconciliation
+              <span
+                class="sr-only"
+              >
+                : 
+                In progress
+              </span>
+            </span>
+          </div>
+        </li>
+      </ol>
+    </nav>
     <div
       aria-label="Payroll Run Locked: reconciliation"
       class="bg-amber-50 border border-amber-200 rounded-lg p-4 flex items-start gap-3"
@@ -3528,6 +4829,7 @@ exports[`Visual Regression - Payroll Flow States > Payroll Run Detail - Verified
             >
               Last updated 
               Jan 15, 2024, 12:00 AM
+              Jan 15, 2024, 1:00 AM
             </p>
             <div
               class="flex items-center gap-2 mt-2"
@@ -4614,6 +5916,348 @@ exports[`Visual Regression - Payroll Flow States > Payroll Wizard - Initial Stat
         Approval History
       </button>
     </div>
+    <nav
+      aria-label="Payroll submission progress"
+      class="w-full"
+    >
+      <ol
+        class="flex flex-col gap-2 sm:flex-row sm:gap-0"
+      >
+        <li
+          class="flex items-start sm:flex-1 sm:gap-0"
+          data-stage="validation"
+          data-state="active"
+          data-testid="stage-validation"
+        >
+          <div
+            class="flex shrink-0 flex-col items-center"
+          >
+            <span
+              aria-hidden="true"
+              class="flex items-center justify-center rounded-full border-2 h-8 w-8 border-indigo-600 text-indigo-600 bg-white"
+            >
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-loader2 w-4 h-4 animate-spin"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M21 12a9 9 0 1 1-6.219-8.56"
+                />
+              </svg>
+            </span>
+            <span
+              class="mt-1 w-0.5 flex-1 rounded-full bg-gray-200 sm:hidden"
+            />
+          </div>
+          <div
+            class="min-w-0 pb-2 pt-1 sm:pr-4"
+          >
+            <span
+              class="block text-sm font-medium text-gray-900"
+            >
+              Validation
+              <span
+                class="sr-only"
+              >
+                : 
+                In progress
+              </span>
+            </span>
+            <span
+              class="block text-xs text-gray-500 mt-0.5"
+            >
+              Run data, treasury, and proof checks
+            </span>
+          </div>
+        </li>
+        <li
+          class="flex items-start sm:flex-1 sm:gap-0"
+          data-stage="approval"
+          data-state="pending"
+          data-testid="stage-approval"
+        >
+          <div
+            class="flex shrink-0 flex-col items-center"
+          >
+            <span
+              aria-hidden="true"
+              class="flex items-center justify-center rounded-full border-2 h-8 w-8 border-gray-300 text-gray-300 bg-white"
+            >
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-minus w-4 h-4"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M5 12h14"
+                />
+              </svg>
+            </span>
+            <span
+              class="mt-1 w-0.5 flex-1 rounded-full bg-gray-200 sm:hidden"
+            />
+          </div>
+          <div
+            class="min-w-0 pb-2 pt-1 sm:pr-4"
+          >
+            <span
+              class="block text-sm font-medium text-gray-400"
+            >
+              Approval
+              <span
+                class="sr-only"
+              >
+                : 
+                Pending
+              </span>
+            </span>
+            <span
+              class="block text-xs text-gray-500 mt-0.5"
+            >
+              Executive sign-off on the run
+            </span>
+          </div>
+        </li>
+        <li
+          class="flex items-start sm:flex-1 sm:gap-0"
+          data-stage="signing"
+          data-state="pending"
+          data-testid="stage-signing"
+        >
+          <div
+            class="flex shrink-0 flex-col items-center"
+          >
+            <span
+              aria-hidden="true"
+              class="flex items-center justify-center rounded-full border-2 h-8 w-8 border-gray-300 text-gray-300 bg-white"
+            >
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-minus w-4 h-4"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M5 12h14"
+                />
+              </svg>
+            </span>
+            <span
+              class="mt-1 w-0.5 flex-1 rounded-full bg-gray-200 sm:hidden"
+            />
+          </div>
+          <div
+            class="min-w-0 pb-2 pt-1 sm:pr-4"
+          >
+            <span
+              class="block text-sm font-medium text-gray-400"
+            >
+              Signing
+              <span
+                class="sr-only"
+              >
+                : 
+                Pending
+              </span>
+            </span>
+            <span
+              class="block text-xs text-gray-500 mt-0.5"
+            >
+              Wallet signature on the batch transaction
+            </span>
+          </div>
+        </li>
+        <li
+          class="flex items-start sm:flex-1 sm:gap-0"
+          data-stage="submission"
+          data-state="pending"
+          data-testid="stage-submission"
+        >
+          <div
+            class="flex shrink-0 flex-col items-center"
+          >
+            <span
+              aria-hidden="true"
+              class="flex items-center justify-center rounded-full border-2 h-8 w-8 border-gray-300 text-gray-300 bg-white"
+            >
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-minus w-4 h-4"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M5 12h14"
+                />
+              </svg>
+            </span>
+            <span
+              class="mt-1 w-0.5 flex-1 rounded-full bg-gray-200 sm:hidden"
+            />
+          </div>
+          <div
+            class="min-w-0 pb-2 pt-1 sm:pr-4"
+          >
+            <span
+              class="block text-sm font-medium text-gray-400"
+            >
+              Submission
+              <span
+                class="sr-only"
+              >
+                : 
+                Pending
+              </span>
+            </span>
+            <span
+              class="block text-xs text-gray-500 mt-0.5"
+            >
+              Transaction broadcast to the network
+            </span>
+          </div>
+        </li>
+        <li
+          class="flex items-start sm:flex-1 sm:gap-0"
+          data-stage="confirmation"
+          data-state="pending"
+          data-testid="stage-confirmation"
+        >
+          <div
+            class="flex shrink-0 flex-col items-center"
+          >
+            <span
+              aria-hidden="true"
+              class="flex items-center justify-center rounded-full border-2 h-8 w-8 border-gray-300 text-gray-300 bg-white"
+            >
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-minus w-4 h-4"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M5 12h14"
+                />
+              </svg>
+            </span>
+            <span
+              class="mt-1 w-0.5 flex-1 rounded-full bg-gray-200 sm:hidden"
+            />
+          </div>
+          <div
+            class="min-w-0 pb-2 pt-1 sm:pr-4"
+          >
+            <span
+              class="block text-sm font-medium text-gray-400"
+            >
+              Confirmation
+              <span
+                class="sr-only"
+              >
+                : 
+                Pending
+              </span>
+            </span>
+            <span
+              class="block text-xs text-gray-500 mt-0.5"
+            >
+              On-chain inclusion verified
+            </span>
+          </div>
+        </li>
+        <li
+          class="flex items-start sm:flex-1 sm:gap-0"
+          data-stage="reconciliation"
+          data-state="pending"
+          data-testid="stage-reconciliation"
+        >
+          <div
+            class="flex shrink-0 flex-col items-center"
+          >
+            <span
+              aria-hidden="true"
+              class="flex items-center justify-center rounded-full border-2 h-8 w-8 border-gray-300 text-gray-300 bg-white"
+            >
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-minus w-4 h-4"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M5 12h14"
+                />
+              </svg>
+            </span>
+          </div>
+          <div
+            class="min-w-0 pb-2 pt-1"
+          >
+            <span
+              class="block text-sm font-medium text-gray-400"
+            >
+              Reconciliation
+              <span
+                class="sr-only"
+              >
+                : 
+                Pending
+              </span>
+            </span>
+            <span
+              class="block text-xs text-gray-500 mt-0.5"
+            >
+              Payouts matched against the run
+            </span>
+          </div>
+        </li>
+      </ol>
+    </nav>
     <nav
       aria-label="Payroll execution progress"
       class="flex items-center"

@@ -2,6 +2,22 @@ import type { StellarNetwork } from "./stellar";
 
 export type OnboardingStatus = "not_started" | "in_progress" | "completed";
 
+// ─── Employee Lifecycle Management (#454) ────────────────────────────────────
+
+export type EmployeeLifecycleStatus =
+  | "active"
+  | "suspended"
+  | "offboarded";
+
+export interface EmployeeLifecycleEvent {
+  id: string;
+  employeeId: string;
+  action: "activate" | "suspend" | "offboard";
+  performedBy: string;
+  performedAt: string;
+  note?: string;
+}
+
 export interface Employee {
   id: string;
   address: string;
@@ -18,6 +34,12 @@ export interface Employee {
   lastOnboardingAttemptAt?: string | null;
   startDate: string;
   lastPayment?: string;
+  /** Lifecycle management status — complements `isActive` / `status`. */
+  lifecycleStatus?: EmployeeLifecycleStatus;
+  suspendedAt?: string | null;
+  offboardedAt?: string | null;
+  /** Privacy-safe reason for the most recent lifecycle transition. */
+  lifecycleNote?: string | null;
 }
 
 export interface Company {
@@ -93,6 +115,15 @@ export interface SessionPayload {
   expiresAt: number;
 }
 
+export type ReconciliationOutcome =
+  | "matched"
+  | "pending"
+  | "mismatched"
+  | "failed"
+  | "manually_reviewed";
+
+export type ReconciliationStatus = ReconciliationOutcome | "partial" | "complete";
+
 export interface PayrollTransaction {
   id: string;
   companyId: string;
@@ -104,6 +135,13 @@ export interface PayrollTransaction {
   employeeCount: number;
   proof: string;
   status: "pending" | "verified" | "failed" | "cancelled";
+  reconciliationStatus?: ReconciliationStatus;
+  reconciliationDetails?: {
+    processedCount: number;
+    totalCount: number;
+    discrepancies?: string[];
+    lastReconciliedAt?: string;
+  };
   approvalStatus?:
     | "draft"
     | "pending_executive_approval"
@@ -253,6 +291,8 @@ export interface AuditAccessRequest {
   requesterEmail: string;
   scope: "read-only" | "full-audit";
   rationale: string;
+  reviewerNotes?: string;
+  requestedExpiresAt?: string;
   status:
     | "pending"
     | "approved"

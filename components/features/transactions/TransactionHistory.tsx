@@ -35,13 +35,21 @@ import {
 } from "lucide-react";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import { MOCK_TRANSACTIONS, MOCK_EMPLOYEES } from "@/lib/api/mockData";
-import type { PayrollTransaction } from "@/types";
+import type { PayrollTransaction, ReconciliationOutcome } from "@/types";
+import type { PayrollTransaction, PayrollRun } from "@/types";
 import TransactionDetailDrawer from "./TransactionDetailDrawer";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 import StatusBadge from "@/components/ui/StatusBadge";
 import { PayrollLockIndicator } from "@/components/ui/PayrollLockIndicator";
+import { ReconciliationStatusBadge } from "@/components/features/payroll/ReconciliationBadge";
+import {
+  RECONCILIATION_STATUS_LABELS,
+  resolveReconciliationStatus,
+} from "@/lib/reconciliation/status";
+import { SubmissionProgressCell } from "@/components/stepper/SubmissionProgressCell";
 
 type StatusFilter = "all" | "verified" | "pending" | "failed" | "cancelled";
+type ReconciliationFilter = "all" | ReconciliationOutcome;
 
 // Helper to determine lock state based on transaction
 function getLockState(
@@ -64,9 +72,10 @@ function getLockState(
 }
 
 interface Filters {
-  /** Free-text search across run id, period, tx hash and status (#167). */
+  /** Free-text search across visible run metadata and reconciliation status (#167). */
   search: string;
   status: StatusFilter;
+  reconciliation: ReconciliationFilter;
   employee: string;
   dateFrom: string;
   dateTo: string;
@@ -85,12 +94,17 @@ interface SavedView {
 const initialFilters: Filters = {
   search: "",
   status: "all",
+  reconciliation: "all",
   employee: "",
   dateFrom: "",
   dateTo: "",
   payrollRun: "",
   quick: { ...EMPTY_QUICK_FILTERS },
 };
+
+function normalizeFilters(filters: Partial<Filters>): Filters {
+  return { ...initialFilters, ...filters };
+}
 
 function generateViewId(): string {
   return `sv_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`;
@@ -111,6 +125,7 @@ function exportToCsv(rows: PayrollTransaction[]): string {
     "ID",
     "Date",
     "Status",
+    "Reconciliation",
     "Total Amount",
     "Employees",
     "Tx Hash",
@@ -121,6 +136,7 @@ function exportToCsv(rows: PayrollTransaction[]): string {
         tx.id,
         new Date(tx.createdAt).toLocaleDateString(),
         tx.status,
+        RECONCILIATION_STATUS_LABELS[resolveReconciliationStatus(tx)],
         `${tx.totalAmount.toLocaleString()}`,
         String(tx.employeeCount),
         tx.txHash ?? "N/A",
@@ -151,7 +167,7 @@ function TransactionHistoryInner({
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  const [filters, setFilters] = useState<Filters>(initialFilters);
+  const [filters, setFilters] = useState<Filters>(() => normalizeFilters(initialFilters));
   const [showFilters, setShowFilters] = useState(false);
   const [selectedTransaction, setSelectedTransaction] =
     useState<PayrollTransaction | null>(null);
@@ -242,6 +258,12 @@ function TransactionHistoryInner({
       results = results.filter((t) => t.status === filters.status);
     }
 
+    if (filters.reconciliation !== "all") {
+      results = results.filter(
+        (t) => resolveReconciliationStatus(t) === filters.reconciliation,
+      );
+    }
+
     if (filters.dateFrom) {
       results = results.filter((t) => t.createdAt >= filters.dateFrom);
     }
@@ -268,6 +290,15 @@ function TransactionHistoryInner({
     return results;
   }, [filters, mode]);
 
+  const activeFilterCount = [
+    !!filters.search.trim(),
+    filters.status !== "all",
+    filters.reconciliation !== "all",
+    !!filters.employee,
+    !!filters.dateFrom,
+    !!filters.dateTo,
+    !!filters.payrollRun,
+  ].filter(Boolean).length;
   // #284: quick filters apply on top of the search/panel result so their
   // faceted counts describe the list the user is actually looking at.
   const filtered = useMemo(
@@ -322,6 +353,7 @@ function TransactionHistoryInner({
   }, [savingName, filters, savedViews.length, setSavedViews]);
 
   const handleApplyView = useCallback((view: SavedView) => {
+    setFilters(normalizeFilters(view.filters));
     setFilters((prev) => ({
       ...initialFilters,
       ...view.filters,
@@ -362,7 +394,8 @@ function TransactionHistoryInner({
 
   const hasFiltersApplied = activeFilterCount > 0;
   const currentView = savedViews.find(
-    (v) => JSON.stringify(v.filters) === JSON.stringify(filters),
+    (v) =>
+      JSON.stringify(normalizeFilters(v.filters)) === JSON.stringify(filters),
   );
 
   return (
@@ -493,7 +526,7 @@ function TransactionHistoryInner({
                 onChange={(e) =>
                   setFilters((prev) => ({ ...prev, search: e.target.value }))
                 }
-                placeholder="Search run id, period, tx hash, status..."
+                placeholder="Search run id, period, tx hash, status, reconciliation..."
                 className="w-full pl-3 pr-8 py-1.5 rounded-md border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-gray-400"
               />
               {filters.search && (
@@ -554,7 +587,7 @@ function TransactionHistoryInner({
             id="filter-panel"
             role="region"
             aria-label="Filter transactions"
-            className="px-4 sm:px-6 py-4 bg-gray-50 border-b grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3"
+            className="px-4 sm:px-6 py-4 bg-gray-50 border-b grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3"
           >
             <div>
               <label
@@ -579,6 +612,32 @@ function TransactionHistoryInner({
                 <option value="pending">Pending</option>
                 <option value="failed">Failed</option>
                 <option value="cancelled">Cancelled</option>
+              </select>
+            </div>
+            <div>
+              <label
+                htmlFor="filter-reconciliation"
+                className="block text-xs font-medium text-gray-600 mb-1"
+              >
+                Reconciliation
+              </label>
+              <select
+                id="filter-reconciliation"
+                value={filters.reconciliation}
+                onChange={(e) =>
+                  setFilters((f) => ({
+                    ...f,
+                    reconciliation: e.target.value as ReconciliationFilter,
+                  }))
+                }
+                className="w-full rounded-md border border-gray-300 bg-white px-3 py-1.5 text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+              >
+                <option value="all">All reconciliation outcomes</option>
+                <option value="matched">Matched</option>
+                <option value="pending">Pending</option>
+                <option value="mismatched">Mismatched</option>
+                <option value="failed">Failed</option>
+                <option value="manually_reviewed">Manually reviewed</option>
               </select>
             </div>
             <div>
@@ -784,6 +843,13 @@ function TransactionHistoryInner({
                     scope="col"
                     className="px-6 py-3 text-xs font-medium text-gray-400 uppercase"
                   >
+                    Reconciliation
+                    Progress
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-6 py-3 text-xs font-medium text-gray-400 uppercase"
+                  >
                     Date
                   </th>
                   <th
@@ -808,6 +874,10 @@ function TransactionHistoryInner({
                     </td>
                     <td className="px-6 py-4">
                       <div className="h-6 bg-gray-200 rounded-full w-14"></div>
+                    </td>
+                    <td className="px-6 py-4">
+                      <div className="h-6 bg-gray-200 rounded-full w-24"></div>
+                      <div className="h-2 bg-gray-200 rounded-full w-16"></div>
                     </td>
                     <td className="px-6 py-4">
                       <div className="h-4 bg-gray-200 rounded w-24"></div>
@@ -865,7 +935,12 @@ function TransactionHistoryInner({
                           {new Date(tx.createdAt).toLocaleDateString()}
                         </p>
                       </div>
-                      <StatusBadge status={tx.status} />
+                      <div className="flex flex-col items-end gap-2">
+                        <StatusBadge status={tx.status} />
+                        <ReconciliationStatusBadge
+                          status={resolveReconciliationStatus(tx)}
+                        />
+                      </div>
                     </div>
                     <div className="mt-3 flex gap-2">
                       <a
@@ -927,6 +1002,13 @@ function TransactionHistoryInner({
                     scope="col"
                     className="px-6 py-3 text-xs font-medium text-gray-600 uppercase"
                   >
+                    Reconciliation
+                    Progress
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-6 py-3 text-xs font-medium text-gray-600 uppercase"
+                  >
                     Date
                   </th>
                   <th
@@ -941,7 +1023,7 @@ function TransactionHistoryInner({
                 {filtered.length === 0 ? (
                   <tr>
                     <td
-                      colSpan={6}
+                      colSpan={7}
                       className="px-6 py-8 text-center text-sm text-gray-500"
                     >
                       {hasFiltersApplied
@@ -985,6 +1067,18 @@ function TransactionHistoryInner({
                             />
                           </div>
                         )}
+                      </td>
+                      <td className="px-6 py-4">
+                        <ReconciliationStatusBadge
+                          status={resolveReconciliationStatus(tx)}
+                        />
+                      </td>
+                      {/* Issue #295: compact lifecycle progress — state only,
+                          no amounts, proofs, or hashes rendered here. */}
+                      <td className="px-6 py-4">
+                        <SubmissionProgressCell
+                          input={{ source: "run", run: tx as PayrollRun }}
+                        />
                       </td>
                       <td className="px-6 py-4 text-gray-600">
                         <div className="font-medium text-gray-900">{formatPeriodLabel(tx)}</div>

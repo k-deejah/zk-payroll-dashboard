@@ -1,11 +1,17 @@
 "use client";
 
+import { useMemo, useState } from "react";
+import { Filter, X } from "lucide-react";
 import { useMemo, useState, useEffect } from "react";
 import { Bookmark, Check, Filter, Pencil, Save, Trash2, X } from "lucide-react";
 import PayrollCalendar from "./PayrollCalendar";
 import { MOCK_PAYROLL_RUNS } from "@/lib/api/mockData";
-import type { PayrollRun } from "@/types/models";
+import type { PayrollRun, ReconciliationOutcome } from "@/types/models";
 import { searchPayrollRuns } from "@/lib/payrollSearch";
+import { resolveReconciliationStatus } from "@/lib/reconciliation/status";
+
+type StatusFilter = "all" | "pending" | "verified" | "failed" | "cancelled";
+type OutcomeFilter = "all" | ReconciliationOutcome;
 import EmptyState from "@/components/ui/EmptyState";
 import { useHelpDrawer, HELP_CONTENT } from "@/stores/helpDrawer";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
@@ -53,6 +59,19 @@ const initialFilters: Filters = {
   dateTo: "",
   outcome: "all",
 };
+
+function generateViewId(): string {
+  if (
+    typeof crypto !== "undefined" &&
+    typeof crypto.randomUUID === "function"
+  ) {
+    return `payroll-view-${crypto.randomUUID()}`;
+  }
+
+  return `payroll-view-${Date.now()}-${Math.random()
+    .toString(36)
+    .slice(2, 10)}`;
+}
 
 function PayrollHistory({ runs = MOCK_PAYROLL_RUNS }: PayrollHistoryProps) {
   const [filters, setFilters] = useState<Filters>(initialFilters);
@@ -105,6 +124,7 @@ function PayrollHistory({ runs = MOCK_PAYROLL_RUNS }: PayrollHistoryProps) {
 
     if (filters.outcome !== "all") {
       results = results.filter(
+        (r) => resolveReconciliationStatus(r) === filters.outcome,
         (r) => r.reconciliationStatus === filters.outcome,
       );
     }
@@ -161,7 +181,7 @@ function PayrollHistory({ runs = MOCK_PAYROLL_RUNS }: PayrollHistoryProps) {
     setSavedViews((previous) => [
       ...previous,
       {
-        id: `payroll-view-${Date.now()}`,
+        id: generateViewId(),
         name,
         filters: { ...filters },
         sortField,
@@ -183,19 +203,25 @@ function PayrollHistory({ runs = MOCK_PAYROLL_RUNS }: PayrollHistoryProps) {
 
   const handleFinishRename = (id: string) => {
     const name = renameValue.trim();
+    if (!name) {
+      setSaveError("Enter a name for this view.");
+      return;
+    }
     if (
-      !name ||
       savedViews.some(
         (view) =>
           view.id !== id && view.name.toLowerCase() === name.toLowerCase(),
       )
-    )
+    ) {
+      setSaveError("A saved view with this name already exists.");
       return;
+    }
     setSavedViews((previous) =>
       previous.map((view) => (view.id === id ? { ...view, name } : view)),
     );
     setEditingViewId(null);
     setRenameValue("");
+    setSaveError("");
   };
 
   return (
@@ -243,16 +269,21 @@ function PayrollHistory({ runs = MOCK_PAYROLL_RUNS }: PayrollHistoryProps) {
                     className="flex items-center gap-2 px-4 py-2 hover:bg-gray-50 group"
                   >
                     {editingViewId === view.id ? (
-                      <div className="flex items-center gap-1 flex-1">
+                      <div className="relative flex items-center gap-1 flex-1">
                         <input
                           value={renameValue}
-                          onChange={(event) =>
-                            setRenameValue(event.target.value)
-                          }
+                          onChange={(event) => {
+                            setRenameValue(event.target.value);
+                            setSaveError("");
+                          }}
                           onKeyDown={(event) => {
                             if (event.key === "Enter")
                               handleFinishRename(view.id);
-                            if (event.key === "Escape") setEditingViewId(null);
+                            if (event.key === "Escape") {
+                              setEditingViewId(null);
+                              setRenameValue("");
+                              setSaveError("");
+                            }
                           }}
                           aria-label={`Rename ${view.name}`}
                           className="flex-1 min-w-0 rounded border border-gray-300 px-2 py-1 text-sm"
@@ -265,6 +296,11 @@ function PayrollHistory({ runs = MOCK_PAYROLL_RUNS }: PayrollHistoryProps) {
                         >
                           <Check className="w-3.5 h-3.5" />
                         </button>
+                        {saveError && (
+                          <p role="alert" className="absolute left-0 top-full mt-1 text-xs text-red-700">
+                            {saveError}
+                          </p>
+                        )}
                       </div>
                     ) : (
                       <button
@@ -327,7 +363,7 @@ function PayrollHistory({ runs = MOCK_PAYROLL_RUNS }: PayrollHistoryProps) {
             onChange={(e) =>
               setFilters((prev) => ({ ...prev, search: e.target.value }))
             }
-            placeholder="Search run id, period, tx hash, status..."
+            placeholder="Search run id, period, tx hash, status, reconciliation..."
             className="w-full pl-3 pr-8 py-1.5 rounded-md border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-gray-400"
           />
           {filters.search && (
@@ -458,10 +494,11 @@ function PayrollHistory({ runs = MOCK_PAYROLL_RUNS }: PayrollHistoryProps) {
               className="w-full rounded-md border border-gray-300 bg-white px-3 py-1.5 text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none"
             >
               <option value="all">All outcomes</option>
-              <option value="complete">Complete</option>
-              <option value="partial">Partial</option>
+              <option value="matched">Matched</option>
               <option value="pending">Pending</option>
+              <option value="mismatched">Mismatched</option>
               <option value="failed">Failed</option>
+              <option value="manually_reviewed">Manually reviewed</option>
             </select>
           </div>
           <div>

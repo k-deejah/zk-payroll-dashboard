@@ -259,7 +259,7 @@ function MonthCalendar({
                     isToday ? "text-indigo-700" : "text-gray-700"
                   }`}
                 >
-                  {day.getDate()}
+                  {day.getUTCDate()}
                 </span>
                 <div className="space-y-0.5">
                   {dayRuns.slice(0, 2).map((run) => {
@@ -344,6 +344,9 @@ function PayrollCalendar({ runs = MOCK_PAYROLL_RUNS }: PayrollCalendarProps) {
   );
 
   const shiftMonth = (delta: number) => {
+    setViewDate((current) =>
+      new Date(Date.UTC(current.getUTCFullYear(), current.getUTCMonth() + delta, 1)),
+    );
     setViewDate((current) => new Date(Date.UTC(current.getUTCFullYear(), current.getUTCMonth() + delta, 1)));
   };
 
